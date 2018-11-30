@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>quiz</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- 导航菜单栏 -->
+        <n-nav-bar></n-nav-bar>
+
+        <!--  -->
+        <div class="container mt-3">
+            
+            <!-- 进度条 -->
+            <n-progress :value="p"></n-progress>
+
+            <!-- 题目 -->
+            <n-question
+                v-for="item in questions"
+                :q="item"></n-question>
+            
+        </div>
+        
+    </div>
+    
+    <!-- 脚本 -->
+    <script>
+        
+        Vue.component('n-question', {
+            props: ['q'],
+            template: `
+            <div class="jumbotron">
+                <!-- 题干 -->
+                <h1 class="display-4">{{q.id}} {{q.title}}</h1>
+                <hr class="my-2">
+                <!-- 选项 -->
+                <div v-for="item in q.items" class="form-check">
+                    <label class="form-check-label">
+                    <input type="radio" class="form-check-input" 
+                    name="" id="" 
+                    value="checkedValue">
+                    {{item}}
+                  </label>
+                </div>
+            </div>   
+            `,
+        });
+        
+        Vue.component('n-progress', {
+            props: ['value'],
+            template: `
+            <div class="progress mb-5">
+                <div
+                    class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+                    role="progressbar"
+                    style="width: 25%;" 
+                    aria-valuenow="25" 
+                    aria-valuemin="0" 
+                    aria-valuemax="100">已完成：{{value}}%</div>
+            </div>
+            `,
+        })
+        
+        // 自定义的组件
+        Vue.component('n-nav-bar', {
+            data: function() {
+                return {
+                    title: '驾校考试平台',
+
+                }
+            },
+            template: `
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">{{title}}</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">首页<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">模拟练习</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">在线考试</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="问题">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                    </form>
+                </div>
+            </nav> 
+            `,
+        })
+        
+        // 实例
+        new Vue({
+            el: '#app',
+            data: {
+                p: 70,
+                questions: [
+                    {
+                        id: 1,
+                        title: '鼠标是哪个时代发明的？',
+                        items: ['1960', '1970', '1980', '1990']
+                    },
+                    {
+                        id: 2,
+                        title: '克隆羊诞生的时间？',
+                        items: ['1996', '1997', '1998', '1999']
+                    },
+                    {
+                        id: 3,
+                        title: '转基因人诞生的时间？',
+                        items: ['9/25', '9/26', '9/27', '9/28']
+                    },
+                ],
+            }
+        });
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
